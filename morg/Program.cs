@@ -11,7 +11,7 @@ if (args[0] == "help")
 }
 else if (args[0].StartsWith("-"))
 {
-    args[0].Remove(0);
+    args[0] = args[0].Remove(0);
     foreach (char c in args[0])
     {
         switch (c)
@@ -26,25 +26,35 @@ else if (args[0].StartsWith("-"))
                 SortGenres(dir); break;
             default:
                 Console.Write(badParams);
-                return;
+                break;
+                //return;
         }
+        
     }
+    SortArtists(dir);
 }
 void SortArtists(string folder)
 {
     foreach(string file in  Directory.GetFiles(folder))
     {
         TagLib.File tag = TagLib.File.Create(file);
-        string artist = tag.Tag.FirstAlbumArtist;
-        if(Directory.Exists(artist))
+        string artist = tag.Tag.FirstArtist;
+        if (artist != null && artist != "")
         {
-            System.IO.File.Move(file, Path.Join(artist, file));
+            if (Directory.Exists(artist))
+            {
+                Console.WriteLine(Path.Join(artist, file));
+                System.IO.File.Move(file, Path.Join(artist, file));
+            }
+            else
+            {
+                Directory.CreateDirectory(artist);
+                Console.WriteLine(Path.Join(artist, file));
+                Console.WriteLine(file);
+                System.IO.File.Move(file, Path.Join(artist, file));
+            }
         }
-        else
-        {
-            Directory.CreateDirectory(artist);
-            System.IO.File.Move(file, Path.Join(artist, file));
-        }
+
     }
 }
 void SortAlbums(string folder)
