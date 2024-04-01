@@ -28,22 +28,28 @@ foreach (string arg in args)
         Console.WriteLine(badParams);
     }
 }
-SortAlbums(dir);
 void SortArtists(string folder)
 {
     foreach(string file in  Directory.GetFiles(folder))
     {
-        TagLib.File tag = TagLib.File.Create(file);
-        string artist = tag.Tag.FirstArtist;
-        if (artist != null && artist != "")
+        try
         {
-            string newPath = Path.Join(Path.GetDirectoryName(file), artist, Path.GetFileName(file));
-            if (!Directory.Exists(artist))
+            TagLib.File tag = TagLib.File.Create(file);
+            string artist = tag.Tag.FirstArtist;
+            if (artist != null && artist != "")
             {
-                Directory.CreateDirectory(artist);
+                string newPath = Path.Join(Path.GetDirectoryName(file), artist, Path.GetFileName(file));
+                if (!Directory.Exists(artist))
+                {
+                    Directory.CreateDirectory(artist);
+                }
+                Console.WriteLine(newPath);
+                System.IO.File.Move(file, newPath);
+
             }
-            Console.WriteLine(newPath);
-            System.IO.File.Move(file, newPath);
+        } 
+        catch
+        {
 
         }
 
@@ -51,22 +57,27 @@ void SortArtists(string folder)
 }
 void SortAlbums(string folder)
 {
-    foreach(string file in Directory.GetFiles(folder))
+    foreach (string file in Directory.GetFiles(folder))
     {
-        TagLib.File tag = TagLib.File.Create(file);
-        string album = tag.Tag.Album;
-        if(album != null && album != "")
+        try
         {
-            string newPath = Path.Join(Path.GetDirectoryName(file), album, Path.GetFileName(file));
-            if(!Directory.Exists(album))
+            TagLib.File tag = TagLib.File.Create(file);
+            string album = tag.Tag.Album;
+            if (album != null && album != "")
             {
-                Directory.CreateDirectory(album);
-            }
-            Console.WriteLine(newPath);
-            System.IO.File.Move(file, newPath);
+                string newPath = Path.Join(Path.GetDirectoryName(file), album, Path.GetFileName(file));
+                if (!Directory.Exists(album))
+                {
+                    Directory.CreateDirectory(album);
+                }
+                Console.WriteLine(newPath);
+                System.IO.File.Move(file, newPath);
 
+            }
         }
-    }
+        catch { }
+        }
+
 }
 void SortGenres(string folder)
 {
