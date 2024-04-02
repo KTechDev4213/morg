@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+	 <PublishAot>true</PublishAot>
   </PropertyGroup>
 
   <ItemGroup>
