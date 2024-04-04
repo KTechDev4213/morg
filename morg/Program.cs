@@ -38,15 +38,19 @@ void SortArtists(string folder)
             string artist = tag.Tag.FirstArtist;
             if (artist != null && artist != "")
             {
-                string newPath = Path.Join(Path.GetDirectoryName(file), artist, Path.GetFileName(file));
-                if (!Directory.Exists(artist))
-                {
-                    Directory.CreateDirectory(artist);
-                }
-                Console.WriteLine(newPath);
-                System.IO.File.Move(file, newPath);
-
+           
             }
+            else
+            {
+                artist = "Unknown Artist";
+            }
+            string newPath = Path.Join(Path.GetDirectoryName(file), artist, Path.GetFileName(file));
+            if (!Directory.Exists(artist))
+            {
+                Directory.CreateDirectory(artist);
+            }
+            Console.WriteLine(newPath);
+            System.IO.File.Move(file, newPath);
         } 
         catch
         {
@@ -64,16 +68,18 @@ void SortAlbums(string folder)
             TagLib.File tag = TagLib.File.Create(file);
             string album = tag.Tag.Album;
             if (album != null && album != "")
+            {            }
+            else
             {
-                string newPath = Path.Join(Path.GetDirectoryName(file), album, Path.GetFileName(file));
-                if (!Directory.Exists(album))
-                {
-                    Directory.CreateDirectory(album);
-                }
-                Console.WriteLine(newPath);
-                System.IO.File.Move(file, newPath);
-
+                album = "Unknown Album";
             }
+            string newPath = Path.Join(Path.GetDirectoryName(file), album, Path.GetFileName(file));
+            if (!Directory.Exists(album))
+            {
+                Directory.CreateDirectory(album);
+            }
+            Console.WriteLine(newPath);
+            System.IO.File.Move(file, newPath);
         }
         catch { }
         }
