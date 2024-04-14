@@ -19,6 +19,10 @@
       source: .
       build-packages:
           - dotnet-sdk-8.0
+      stage-packages:
+          - dotnet-runtime-8.0
   apps:
     morg:
       command: morg
+  #apps.morg.enviroment:
+    
