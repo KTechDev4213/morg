@@ -22,7 +22,8 @@
       build-packages:
           - dotnet-sdk-8.0
       stage-packages:
-          - dotnet-runtime-8.0
+          - libicu70
+#          - dotnet-sdk-8.0
   apps:
     morg:
       command: morg
