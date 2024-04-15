@@ -18,6 +18,7 @@
     morg:
       # See 'snapcraft plugins'
       plugin: dotnet
+      dotnet-build-configuration: Release
       source: .
       build-packages:
           - dotnet-sdk-8.0
