@@ -1,6 +1,6 @@
 # morg
 A c# program that organizes music into folders based on artist or album tags.
-morg artist to sort it by artist or morg album to sort by album.
+'morg artist' to sort it by artist or 'morg album' to sort by album.
 Available on the snap store
 
 
